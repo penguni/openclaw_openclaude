@@ -1,0 +1,35 @@
+{
+  "id": "openclaude",
+  "enabledByDefault": true,
+  "providers": ["openclaude"],
+  "modelSupport": {
+    "modelPrefixes": ["openclaude/"]
+  },
+  "providerAuthChoices": [
+    {
+      "provider": "openclaude",
+      "method": "local",
+      "choiceId": "local",
+      "choiceLabel": "Local OpenClaude gRPC",
+      "choiceHint": "Connect to a local OpenClaude gRPC server",
+      "assistantPriority": 100,
+      "groupId": "openclaude",
+      "groupLabel": "OpenClaude",
+      "groupHint": "Local gRPC Integration"
+    }
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "grpcHost": {
+        "type": "string",
+        "default": "localhost"
+      },
+      "grpcPort": {
+        "type": "number",
+        "default": 50051
+      }
+    }
+  }
+}
