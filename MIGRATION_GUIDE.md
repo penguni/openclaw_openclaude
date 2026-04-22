@@ -102,4 +102,25 @@ bun dev:grpc
 
 ## 5. 트러블슈팅 (Troubleshooting)
 * **pnpm install 오류:** 패키지 릴리즈 날짜 제한(`minimumReleaseAge`) 오류가 발생하면 `pnpm-workspace.yaml`의 `minimumReleaseAgeExclude` 목록에 해당 패키지를 추가하십시오. (현재 `tokenjuice`가 추가되어 있습니다.)
-* **gRPC 연결 오류:** OpenClaw가 `localhost:50051`에 접속할 수 없는 경우, `openclaw.plugin.json` 또는 `config.json`에서 `grpcHost`와 `grpcPort` 설정을 확인하십시오.
+*   **gRPC 연결 오류:** OpenClaw가 `localhost:50051`에 접속할 수 없는 경우, `openclaw.plugin.json` 또는 `config.json`에서 `grpcHost`와 `grpcPort` 설정을 확인하십시오.
+
+---
+
+## 부록: 로컬 모델 (Ollama/Gemma 등) 사용 방법
+
+Anthropic의 Claude API 대신 로컬의 Ollama 모델을 사용하고 싶은 경우, **단계 3**에서 서버를 실행할 때 다음과 같이 환경 변수를 추가하여 실행하십시오.
+
+```bash
+cd ~/projects/openclaude_chan
+
+# Ollama의 Gemma 모델을 사용하는 예시
+CLAUDE_CODE_USE_OPENAI=1 \
+OPENAI_BASE_URL=http://localhost:11434/v1 \
+OPENAI_MODEL=gemma2:9b \
+OPENAI_API_KEY=ollama \
+bun dev:grpc
+```
+
+*   `OPENAI_MODEL`: `ollama list` 명령어로 확인한 모델명을 입력하십시오.
+*   이 설정을 사용하면 OpenClaw(텔레그램)로부터 들어온 요청이 맥미니 로컬에서 돌아가는 Gemma 모델에 의해 처리됩니다.
+
